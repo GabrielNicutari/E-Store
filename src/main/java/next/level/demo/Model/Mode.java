@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "genres", schema = "nextlevel", catalog = "")
-public class Genres {
+@Table(name = "modes", schema = "nextlevel", catalog = "")
+public class Mode {
     private int id;
     private String name;
 
@@ -33,7 +33,7 @@ public class Genres {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Genres that = (Genres) o;
+        Mode that = (Mode) o;
         return id == that.id &&
                 Objects.equals(name, that.name);
     }

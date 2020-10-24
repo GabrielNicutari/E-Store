@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "games", schema = "nextlevel", catalog = "")
-public class Games {
+public class Game {
     private int id;
     private String title;
     private String description;
@@ -155,7 +155,7 @@ public class Games {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Games that = (Games) o;
+        Game that = (Game) o;
         return id == that.id &&
                 Double.compare(that.review, review) == 0 &&
                 Objects.equals(title, that.title) &&

@@ -5,7 +5,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "pegi_ratings", schema = "nextlevel", catalog = "")
-public class PegiRatings {
+public class PegiRating {
     private int id;
     private String rating;
     private String ratingUrl;
@@ -44,7 +44,7 @@ public class PegiRatings {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PegiRatings that = (PegiRatings) o;
+        PegiRating that = (PegiRating) o;
         return id == that.id &&
                 Objects.equals(rating, that.rating) &&
                 Objects.equals(ratingUrl, that.ratingUrl);
