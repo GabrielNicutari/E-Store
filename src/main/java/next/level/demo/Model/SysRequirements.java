@@ -5,7 +5,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "sys_requirements", schema = "nextlevel", catalog = "")
-public class SysRequirementsEntity {
+public class SysRequirements {
     private int id;
     private String cpu;
     private String gpu;
@@ -77,7 +77,7 @@ public class SysRequirementsEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SysRequirementsEntity that = (SysRequirementsEntity) o;
+        SysRequirements that = (SysRequirements) o;
         return id == that.id &&
                 Objects.equals(cpu, that.cpu) &&
                 Objects.equals(gpu, that.gpu) &&

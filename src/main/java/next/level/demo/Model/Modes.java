@@ -5,7 +5,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "modes", schema = "nextlevel", catalog = "")
-public class ModesEntity {
+public class Modes {
     private int id;
     private String name;
 
@@ -33,7 +33,7 @@ public class ModesEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ModesEntity that = (ModesEntity) o;
+        Modes that = (Modes) o;
         return id == that.id &&
                 Objects.equals(name, that.name);
     }

@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "game_has_fields", schema = "nextlevel", catalog = "")
-public class GameHasFieldsEntity {
+public class GameHasFields {
     private int id;
 
     @Id
@@ -25,7 +25,7 @@ public class GameHasFieldsEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GameHasFieldsEntity that = (GameHasFieldsEntity) o;
+        GameHasFields that = (GameHasFields) o;
         return id == that.id;
     }
 
