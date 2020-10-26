@@ -1,10 +1,10 @@
 package next.level.demo;
 
-import next.level.demo.Controller.GameController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+
+@SpringBootApplication(scanBasePackages={"next.level.demo.Controller", "next.level.demo.Repository"})
 public class NextLevelApplication {
 
     public static void main(String[] args) {
