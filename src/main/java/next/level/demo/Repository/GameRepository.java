@@ -1,4 +1,8 @@
 package next.level.demo.Repository;
 
-public class GameRepository {
+import next.level.demo.Model.Game;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface GameRepository extends JpaRepository<Game, Integer> {
+
 }

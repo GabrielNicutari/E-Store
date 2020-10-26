@@ -1,5 +1,6 @@
 package next.level.demo;
 
+import next.level.demo.Controller.GameController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -9,5 +10,4 @@ public class NextLevelApplication {
     public static void main(String[] args) {
         SpringApplication.run(NextLevelApplication.class, args);
     }
-
 }
