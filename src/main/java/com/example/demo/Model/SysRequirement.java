@@ -12,6 +12,17 @@ public class SysRequirement {
     private String storage;
     private String os;
 
+    public SysRequirement(int id, String cpu, String gpu, String memory, String storage, String os) {
+        this.id = id;
+        this.cpu = cpu;
+        this.gpu = gpu;
+        this.memory = memory;
+        this.storage = storage;
+        this.os = os;
+    }
+
+    public SysRequirement(){}
+
     public SysRequirement() {}
 
     public SysRequirement(int id) {

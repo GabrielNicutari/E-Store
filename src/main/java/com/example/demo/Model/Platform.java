@@ -14,6 +14,11 @@ public class Platform {
         this.id = id;
     }
 
+    public Platform(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {
