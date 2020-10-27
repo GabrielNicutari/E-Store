@@ -22,6 +22,26 @@ public class Game {
     private String adUrl;
     private Collection<GameHasFields> gameHasFieldsById;
 
+    public Game() {
+    }
+
+    public Game(int id, String title, String description, Date releaseDate, String developer, String publisher, String engine, String price,
+                double review, String posterUrl, String coverUrl, String trailerUrl, String adUrl) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.releaseDate = releaseDate;
+        this.developer = developer;
+        this.publisher = publisher;
+        this.engine = engine;
+        this.price = price;
+        this.review = review;
+        this.posterUrl = posterUrl;
+        this.coverUrl = coverUrl;
+        this.trailerUrl = trailerUrl;
+        this.adUrl = adUrl;
+    }
+
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {
