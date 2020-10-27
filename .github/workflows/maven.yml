@@ -21,4 +21,8 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
+      env:
+        DATABASE_URL: ${{secrets.DATABASE_URL}}
+        DATABASE_USERNAME: ${{secrets.DATABASE_USERNAME}}
+        DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
       run: mvn -B package --file pom.xml
