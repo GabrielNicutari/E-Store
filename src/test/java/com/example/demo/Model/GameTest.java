@@ -42,12 +42,17 @@ class GameTest {
 
     @Test
     void getReleaseDate() {
-        String date = game.getReleaseDate().toString();
-        assertEquals("2015-03-31", date);
+        String str = "2015-03-31";
+        Date date = Date.valueOf(str);
+        assertTrue(date.equals(game.getReleaseDate()));
     }
 
     @Test
     void setReleaseDate() {
+        String str = "2015-03-31";
+        Date date = Date.valueOf(str);
+        game.setReleaseDate(date);
+        assertTrue(date.equals(game.getReleaseDate()));
     }
 
     @Test
