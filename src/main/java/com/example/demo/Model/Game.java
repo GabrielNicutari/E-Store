@@ -1,13 +1,12 @@
-package next.level.demo.Model;
+package com.example.demo.Model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.Objects;
 
 @Entity
-public class Games {
+@Table(name = "games")
+public class Game {
     private int id;
     private String title;
     private String description;
@@ -156,44 +155,24 @@ public class Games {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
-        Games games = (Games) o;
-
-        if (id != games.id) return false;
-        if (Double.compare(games.review, review) != 0) return false;
-        if (title != null ? !title.equals(games.title) : games.title != null) return false;
-        if (description != null ? !description.equals(games.description) : games.description != null) return false;
-        if (releaseDate != null ? !releaseDate.equals(games.releaseDate) : games.releaseDate != null) return false;
-        if (developer != null ? !developer.equals(games.developer) : games.developer != null) return false;
-        if (publisher != null ? !publisher.equals(games.publisher) : games.publisher != null) return false;
-        if (engine != null ? !engine.equals(games.engine) : games.engine != null) return false;
-        if (price != null ? !price.equals(games.price) : games.price != null) return false;
-        if (posterUrl != null ? !posterUrl.equals(games.posterUrl) : games.posterUrl != null) return false;
-        if (coverUrl != null ? !coverUrl.equals(games.coverUrl) : games.coverUrl != null) return false;
-        if (trailerUrl != null ? !trailerUrl.equals(games.trailerUrl) : games.trailerUrl != null) return false;
-        if (adUrl != null ? !adUrl.equals(games.adUrl) : games.adUrl != null) return false;
-
-        return true;
+        Game game = (Game) o;
+        return id == game.id &&
+                Double.compare(game.review, review) == 0 &&
+                Objects.equals(title, game.title) &&
+                Objects.equals(description, game.description) &&
+                Objects.equals(releaseDate, game.releaseDate) &&
+                Objects.equals(developer, game.developer) &&
+                Objects.equals(publisher, game.publisher) &&
+                Objects.equals(engine, game.engine) &&
+                Objects.equals(price, game.price) &&
+                Objects.equals(posterUrl, game.posterUrl) &&
+                Objects.equals(coverUrl, game.coverUrl) &&
+                Objects.equals(trailerUrl, game.trailerUrl) &&
+                Objects.equals(adUrl, game.adUrl);
     }
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = id;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (releaseDate != null ? releaseDate.hashCode() : 0);
-        result = 31 * result + (developer != null ? developer.hashCode() : 0);
-        result = 31 * result + (publisher != null ? publisher.hashCode() : 0);
-        result = 31 * result + (engine != null ? engine.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        temp = Double.doubleToLongBits(review);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (posterUrl != null ? posterUrl.hashCode() : 0);
-        result = 31 * result + (coverUrl != null ? coverUrl.hashCode() : 0);
-        result = 31 * result + (trailerUrl != null ? trailerUrl.hashCode() : 0);
-        result = 31 * result + (adUrl != null ? adUrl.hashCode() : 0);
-        return result;
+        return Objects.hash(id, title, description, releaseDate, developer, publisher, engine, price, review, posterUrl, coverUrl, trailerUrl, adUrl);
     }
 }
