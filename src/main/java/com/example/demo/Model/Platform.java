@@ -8,6 +8,11 @@ public class Platform {
     private int id;
     private String name;
 
+    public Platform(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {
