@@ -12,6 +12,12 @@ public class SysRequirement {
     private String storage;
     private String os;
 
+    public SysRequirement() {}
+
+    public SysRequirement(int id) {
+        this.id = id;
+    }
+
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {
