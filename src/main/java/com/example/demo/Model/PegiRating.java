@@ -9,6 +9,12 @@ public class PegiRating {
     private String rating;
     private String ratingUrl;
 
+    public PegiRating() {}
+
+    public PegiRating(int id) {
+        this.id = id;
+    }
+
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {

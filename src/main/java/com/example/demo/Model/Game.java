@@ -22,7 +22,11 @@ public class Game {
     private String adUrl;
     private Collection<GameHasFields> gameHasFieldsById;
 
-    public Game() {
+    public Game() {}
+
+    //In order to test GameHasFields fully
+    public Game(int id) {
+        this.id = id;
     }
 
     public Game(int id, String title, String description, Date releaseDate, String developer, String publisher, String engine, String price,
