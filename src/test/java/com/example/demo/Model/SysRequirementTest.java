@@ -80,4 +80,19 @@ class SysRequirementTest {
                 "memoryTest", "storageTest", "osTest");
         assertTrue(sysRequirementTest.equals(sysRequirement));
     }
+
+    @Test
+    void testEquals2() {
+        assertNotEquals(new SysRequirement(), sysRequirementTest);
+    }
+
+    @Test
+    void testHashCode() {
+        int result = sysRequirementTest.getId() * 31 + sysRequirementTest.getCpu().hashCode();
+        result = 31 * result + sysRequirementTest.getGpu().hashCode();
+        result = 31 * result + sysRequirementTest.getMemory().hashCode();
+        result = 31 * result + sysRequirementTest.getStorage().hashCode();
+        result = 31 * result + sysRequirementTest.getOs().hashCode();
+        assertEquals(result, sysRequirementTest.hashCode());
+    }
 }

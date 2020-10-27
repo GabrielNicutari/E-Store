@@ -34,4 +34,14 @@ class PlatformTest {
         Platform platform = new Platform(1, "nameTest");
         assertTrue(platformTest.equals(platform));
     }
+
+    @Test
+    void testEquals2() {
+        assertNotEquals(new Platform(), platformTest);
+    }
+
+    @Test
+    void testHashCode() {
+        assertEquals(platformTest.getId() * 31 + platformTest.getName().hashCode(), platformTest.hashCode());
+    }
 }
