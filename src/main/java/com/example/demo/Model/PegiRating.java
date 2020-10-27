@@ -11,8 +11,10 @@ public class PegiRating {
 
     public PegiRating() {}
 
-    public PegiRating(int id) {
+    public PegiRating(int id, String rating, String ratingUrl) {
         this.id = id;
+        this.rating = rating;
+        this.ratingUrl = ratingUrl;
     }
 
     @Id
