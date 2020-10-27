@@ -23,8 +23,6 @@ public class SysRequirement {
 
     public SysRequirement(){}
 
-    public SysRequirement() {}
-
     public SysRequirement(int id) {
         this.id = id;
     }

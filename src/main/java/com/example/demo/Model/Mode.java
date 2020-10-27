@@ -8,22 +8,17 @@ public class Mode {
     private int id;
     private String name;
 
-<<<<<<< Updated upstream
     public Mode() {}
 
     public Mode(int id) {
         this.id = id;
     }
 
-=======
     public Mode(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Mode() {}
-
->>>>>>> Stashed changes
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {
