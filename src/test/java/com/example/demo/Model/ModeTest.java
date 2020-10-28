@@ -36,4 +36,15 @@ class ModeTest {
         mode.setName(name);
         assertEquals(name, mode.getName());
     }
+
+    @Test
+    void testEquals() {
+        assertEquals(new Mode(), new Mode());
+        assertNotEquals(new Mode(), mode);
+    }
+
+    @Test
+    void testHashCode() {
+        assertEquals(mode.getId() * 31 + mode.getName().hashCode(), mode.hashCode());
+    }
 }

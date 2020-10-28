@@ -47,4 +47,17 @@ class PegiRatingTest {
         pegiRating.setRatingUrl(ratingUrl);
         assertTrue(ratingUrl.equals(pegiRating.getRatingUrl()));
     }
+
+    @Test
+    void testEquals() {
+        assertEquals(new PegiRating(), new PegiRating());
+        assertNotEquals(new PegiRating(), pegiRating);
+    }
+
+    @Test
+    void testHashCode() {
+        int result = pegiRating.getId() * 31 + pegiRating.getRating().hashCode();
+        result = 31 * result + pegiRating.getRatingUrl().hashCode();
+        assertEquals(result, pegiRating.hashCode());
+    }
 }
