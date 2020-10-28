@@ -8,6 +8,17 @@ public class Mode {
     private int id;
     private String name;
 
+    public Mode() {}
+
+    public Mode(int id) {
+        this.id = id;
+    }
+
+    public Mode(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {

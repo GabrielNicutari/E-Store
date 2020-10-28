@@ -13,6 +13,20 @@ public class GameHasFields {
     private Mode modeByModeId;
     private PegiRating pegiRatingsByPegiRatingId;
 
+    public GameHasFields() {}
+
+    public GameHasFields(int id, Game gameByGameId, Platform platformByPlatformId,
+                         SysRequirement sysRequirementsBySysRequirementId,
+                         Genre genreByGenreId, Mode modeByModeId, PegiRating pegiRatingsByPegiRatingId) {
+        this.id = id;
+        this.gameByGameId = gameByGameId;
+        this.platformByPlatformId = platformByPlatformId;
+        this.sysRequirementsBySysRequirementId = sysRequirementsBySysRequirementId;
+        this.genreByGenreId = genreByGenreId;
+        this.modeByModeId = modeByModeId;
+        this.pegiRatingsByPegiRatingId = pegiRatingsByPegiRatingId;
+    }
+
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {

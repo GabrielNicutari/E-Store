@@ -9,6 +9,18 @@ public class PegiRating {
     private String rating;
     private String ratingUrl;
 
+    public PegiRating() {}
+
+    public PegiRating(int id) {
+        this.id = id;
+    }
+
+    public PegiRating(int id, String rating, String ratingUrl) {
+        this.id = id;
+        this.rating = rating;
+        this.ratingUrl = ratingUrl;
+    }
+
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {
