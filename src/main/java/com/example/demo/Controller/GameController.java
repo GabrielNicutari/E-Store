@@ -1,6 +1,8 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Model.Game;
+import com.example.demo.Model.GameHasFields;
+import com.example.demo.Repository.GameHasFieldsRepository;
 import com.example.demo.Repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,11 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/games")
@@ -24,6 +22,9 @@ public class GameController {
 
     @Autowired
     GameRepository gameRepository;
+
+    @Autowired
+    GameHasFieldsRepository gameHasFieldsRepository;
 
     private Sort.Direction getSortDirection(String direction) {
         if(direction.equals("asc")) {
@@ -39,7 +40,7 @@ public class GameController {
             @RequestParam(required = false) String key,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size,
-            @RequestParam(defaultValue = "id,desc") String[] sort
+            @RequestParam(defaultValue = "id,asc") String[] sort
     ) {
 
         List<Order> orders = new ArrayList<>();
@@ -80,16 +81,20 @@ public class GameController {
     @PostMapping("/create")
     public ResponseEntity<Game> createGame(@RequestBody Game game){
         try {
-//            return new ResponseEntity<>(gameRepository.save(game), HttpStatus.CREATED);
+            Game _game = gameRepository.save(game);
 
-            Game _game = gameRepository.save(new Game(game.getId(), game.getTitle(), game.getDescription(),
-                    game.getReleaseDate(), game.getDeveloper(), game.getPublisher(), game.getEngine(),
-                    game.getPrice(), game.getReview(), game.getPosterUrl(), game.getCoverUrl(),
-                    game.getTrailerUrl(), game.getAdUrl()));
+            Collection<GameHasFields> gameHasFieldsCollection = _game.getGameHasFieldsById();
+            for(GameHasFields gameHasFields : gameHasFieldsCollection) {
 
+                gameHasFields.setGameByGameId(new Game(game.getId()));
+
+                gameHasFieldsRepository.save(gameHasFields);
+
+            }
             return new ResponseEntity<>(_game, HttpStatus.CREATED);
 
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
