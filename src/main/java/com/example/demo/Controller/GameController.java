@@ -44,7 +44,7 @@ public class GameController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") int id) {
+    public ResponseEntity<HttpStatus> deleteGame(@PathVariable("id") int id) {
         gameRepository.deleteById(id);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
