@@ -1,5 +1,7 @@
 package com.example.demo.Model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
@@ -48,6 +50,8 @@ public class Game {
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name="native", strategy = "native")
     public int getId() {
         return id;
     }

@@ -1,5 +1,8 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 @Entity
@@ -29,6 +32,8 @@ public class GameHasFields {
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name="native", strategy = "native")
     public int getId() {
         return id;
     }
@@ -54,10 +59,11 @@ public class GameHasFields {
         return id;
     }
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "game_id", referencedColumnName = "id", nullable = false)
     public Game getGameByGameId() {
-        return null;
+        return gameByGameId;
     }
 
     public void setGameByGameId(Game gameByGameId) {
