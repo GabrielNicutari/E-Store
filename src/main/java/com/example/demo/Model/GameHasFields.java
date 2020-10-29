@@ -1,5 +1,7 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -54,10 +56,11 @@ public class GameHasFields {
         return id;
     }
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "game_id", referencedColumnName = "id", nullable = false)
     public Game getGameByGameId() {
-        return null;
+        return gameByGameId;
     }
 
     public void setGameByGameId(Game gameByGameId) {
