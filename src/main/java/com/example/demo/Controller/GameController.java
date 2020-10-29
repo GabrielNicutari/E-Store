@@ -34,59 +34,47 @@ public class GameController {
         return Sort.Direction.DESC;
     }
 
-    @GetMapping("")
-    public ResponseEntity<Map<String, Object>> pagination(@RequestParam(defaultValue = "0") int page,
-                                                        @RequestParam(defaultValue = "2") int size,
-                                                        @RequestParam(defaultValue = "id,desc") String[] sort) {
-
-        //Pagination
-        Pageable paging = PageRequest.of(page, size);
-        Page<Game> pageTuts = gameRepository.findAll(paging);
-
-        try {
-            List<Game> games = pageTuts.getContent();
-
-            if(games.isEmpty())
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
-            Map<String, Object> response = new HashMap<>();
-            response.put("tutorials", games);
-            response.put("currPage", pageTuts.getNumber());
-            response.put("totalItems", pageTuts.getTotalElements());
-            response.put("totalPages", pageTuts.getTotalPages());
-
-            return new ResponseEntity<>(response, HttpStatus.OK);
-
-        }catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @GetMapping("/sorting")
-    public ResponseEntity<List<Game>> sorting(@RequestParam(defaultValue = "id,desc") String[] sort) {
+    @GetMapping("/")
+    public ResponseEntity<Map<String,Object>> getPageOfGames(
+            @RequestParam(required = false) String title,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "3") int size,
+            @RequestParam(defaultValue = "id,desc") String[] sort
+    ) {
 
         List<Order> orders = new ArrayList<>();
-
-        if(sort[0].contains(",")) {
-            for (String sortOrder: sort) {
+        if (sort[0].contains(",")) {
+            for (String sortOrder : sort) {
                 String[] _sort = sortOrder.split(",");
-                orders.add(new Order(getSortDirection(_sort[1]),_sort[0]));
+                orders.add(new Order(getSortDirection(_sort[1]), _sort[0]));
             }
         } else {
-            orders.add(new Order(getSortDirection(sort[1]),sort[0]));
+            //sort=[field,direction]
+            orders.add(new Order(getSortDirection(sort[1]), sort[0]));
         }
 
-        List<Game> tutorials = gameRepository.findAll(Sort.by(orders));
-        try {
-            if(tutorials.isEmpty())
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        Pageable pagingSort = PageRequest.of(page, size, Sort.by(orders));
 
-            return new ResponseEntity<>(tutorials, HttpStatus.OK);
+        Page<Game> pageTuts;
+        if (title == null)
+            pageTuts = GameRepository.findAll(pagingSort);
+        else
+            pageTuts = GameRepository.findByTitleContaining(title, pagingSort);
 
-        }catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        List<Game> game = pageTuts.getContent();
+
+        if (game.isEmpty())
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("games", game);
+        response.put("currentPage", pageTuts.getNumber());
+        response.put("totalItems", pageTuts.getTotalElements());
+        response.put("totalPages", pageTuts.getTotalPages());
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
+}
 
     //inside fetch
     @GetMapping("/s")
