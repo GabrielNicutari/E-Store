@@ -36,7 +36,7 @@ public class GameController {
 
     @GetMapping("/")
     public ResponseEntity<Map<String,Object>> getPageOfGames(
-            @RequestParam(required = false) String title,
+            @RequestParam(required = false) String key,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "3") int size,
             @RequestParam(defaultValue = "id,desc") String[] sort
@@ -56,38 +56,25 @@ public class GameController {
         Pageable pagingSort = PageRequest.of(page, size, Sort.by(orders));
 
         Page<Game> pageTuts;
-        if (title == null)
-            pageTuts = GameRepository.findAll(pagingSort);
-        else
-            pageTuts = GameRepository.findByTitleContaining(title, pagingSort);
 
-        List<Game> game = pageTuts.getContent();
+        if(key == null) {
+            pageTuts = gameRepository.findAll(pagingSort);
+        } else {
+            pageTuts = gameRepository.findAllByKeyword(key, pagingSort);
+        }
 
-        if (game.isEmpty())
+        List<Game> games = pageTuts.getContent();
+
+        if (games.isEmpty())
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
         Map<String, Object> response = new HashMap<>();
-        response.put("games", game);
+        response.put("games", games);
         response.put("currentPage", pageTuts.getNumber());
         response.put("totalItems", pageTuts.getTotalElements());
         response.put("totalPages", pageTuts.getTotalPages());
 
         return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-}
-
-    //inside fetch
-    @GetMapping("/s")
-    public ResponseEntity<List<Game>> fetchAll2(@RequestParam(required = false) String key) {
-        List<Game> games = new ArrayList<>();
-
-        if(key == null) {
-            games.addAll(gameRepository.findAll());
-        } else {
-            games.addAll(gameRepository.findAllByKeyword(key));
-        }
-
-        return new ResponseEntity<>(games, HttpStatus.OK);
     }
 
     @PostMapping("/create")
