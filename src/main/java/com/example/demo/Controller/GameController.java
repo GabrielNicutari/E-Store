@@ -35,7 +35,7 @@ public class GameController {
         return Sort.Direction.DESC;
     }
 
-    @GetMapping("/")
+    @GetMapping({"/", ""})
     public ResponseEntity<Map<String,Object>> getPageOfGames(
             @RequestParam(required = false) String key,
             @RequestParam(defaultValue = "0") int page,
