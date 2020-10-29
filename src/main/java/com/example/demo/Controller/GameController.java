@@ -90,4 +90,25 @@ public class GameController {
         }
     }
 
+    //inside fetch
+    @GetMapping("/s")
+    public ResponseEntity<List<Game>> fetchAll2(@RequestParam(required = false) String key) {
+        List<Game> games = new ArrayList<>();
+
+        if(key == null) {
+            games.addAll(gameRepository.findAll());
+        } else {
+            games.addAll(gameRepository.findAllByKeyword(key));
+        }
+
+        return new ResponseEntity<>(games, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<HttpStatus> deleteGame(@PathVariable("id") int id) {
+        gameRepository.deleteById(id);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }

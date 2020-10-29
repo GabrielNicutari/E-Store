@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameHasFieldsTest {
 
-    private GameHasFields gameHasFields = new GameHasFields(20, null, new Platform(10), new SysRequirement(10),
+    private GameHasFields gameHasFields = new GameHasFields(20, new Game(10), new Platform(10), new SysRequirement(10),
             new Genre(10), new Mode(10), new PegiRating(10));
 
     @Test
@@ -33,14 +33,13 @@ class GameHasFieldsTest {
 
     @Test
     void getGameByGameId() {
-        assertEquals(null,gameHasFields.getGameByGameId()); //for now
+        assertEquals(new Game(10),gameHasFields.getGameByGameId());
     }
 
     @Test
     void setGameByGameId() {
-        //still returns null
         gameHasFields.setGameByGameId(new Game(25));
-        assertEquals(null, gameHasFields.getGameByGameId());
+        assertEquals(new Game(25), gameHasFields.getGameByGameId());
     }
 
     @Test
