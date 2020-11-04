@@ -31,9 +31,8 @@ public class Game {
         this.id = id;
     }
 
-    public Game(int id, String title, String description, Date releaseDate, String developer, String publisher, String engine, String price,
+    public Game(String title, String description, Date releaseDate, String developer, String publisher, String engine, String price,
                 double review, String posterUrl, String coverUrl, String trailerUrl, String adUrl) {
-        this.id = id;
         this.title = title;
         this.description = description;
         this.releaseDate = releaseDate;

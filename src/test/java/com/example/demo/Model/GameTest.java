@@ -11,7 +11,7 @@ class GameTest {
     //Inserting test data.
     String str = "2015-03-31";
     Date date = Date.valueOf(str);
-    private Game game = new Game (1, "TitleTest","DescriptionTest", date
+    private Game game = new Game ("TitleTest","DescriptionTest", date
             ,"DeveloperTest","PublisherTest","EngineTest"
             ,"PriceTest",20.0,"PosterTest"
             ,"CoverTest","TrailerTest","AdTest");
