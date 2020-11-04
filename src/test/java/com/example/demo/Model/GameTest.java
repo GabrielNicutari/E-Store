@@ -18,7 +18,7 @@ class GameTest {
 
     @Test
     void getId() {
-        assertEquals(1, game.getId());
+        assertEquals(0, game.getId());
     }
 
     @Test
