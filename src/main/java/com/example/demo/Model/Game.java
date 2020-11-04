@@ -7,7 +7,7 @@ import java.sql.Date;
 import java.util.Collection;
 
 @Entity
-@Table(name = "games")
+@Table(name = "games", schema = "nextlevel", catalog = "")
 public class Game {
     private int id;
     private String title;
@@ -23,6 +23,7 @@ public class Game {
     private String trailerUrl;
     private String adUrl;
     private Collection<GameHasFields> gameHasFieldsById;
+    private Collection<OrderHasGames> orderHasGamesById;
 
     public Game() {}
 
@@ -232,5 +233,14 @@ public class Game {
 
     public void setGameHasFieldsById(Collection<GameHasFields> gameHasFieldsById) {
         this.gameHasFieldsById = gameHasFieldsById;
+    }
+
+    @OneToMany(mappedBy = "gamesByProductId")
+    public Collection<OrderHasGames> getOrderHasGamesById() {
+        return orderHasGamesById;
+    }
+
+    public void setOrderHasGamesById(Collection<OrderHasGames> orderHasGamesById) {
+        this.orderHasGamesById = orderHasGamesById;
     }
 }
