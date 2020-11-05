@@ -4,6 +4,7 @@ import com.example.demo.Model.Game;
 import com.example.demo.Model.GameHasFields;
 import com.example.demo.Repository.GameHasFieldsRepository;
 import com.example.demo.Repository.GameRepository;
+import com.example.demo.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -80,7 +81,6 @@ public class GameController {
 
     @PostMapping("/create")
     public ResponseEntity<Game> createGame(@RequestBody Game game){
-        try {
             Game _game = gameRepository.save(game);
 
             Collection<GameHasFields> gameHasFieldsCollection = _game.getGameHasFieldsById();
@@ -92,19 +92,13 @@ public class GameController {
 
             }
             return new ResponseEntity<>(_game, HttpStatus.CREATED);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Game> updateGame(@PathVariable("id") int id, @RequestBody Game game) {
-        Optional<Game> gameData = gameRepository.findById(id);
+        Game _game = gameRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Not found game with id" + id));
 
-        if (gameData.isPresent()) {
-            Game _game = gameData.get();
             _game.setTitle(game.getTitle());
             _game.setDescription(game.getDescription());
             _game.setReleaseDate(game.getReleaseDate());
@@ -118,11 +112,9 @@ public class GameController {
             _game.setTrailerUrl(game.getTrailerUrl());
             _game.setAdUrl(game.getAdUrl());
 
-            return new ResponseEntity<>(gameRepository.save(_game), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+            return new ResponseEntity<>(gameRepository.save(game), HttpStatus.OK);
     }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<HttpStatus> deleteGame(@PathVariable("id") int id) {
         gameRepository.deleteById(id);
