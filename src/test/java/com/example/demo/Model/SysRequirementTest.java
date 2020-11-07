@@ -82,8 +82,8 @@ class SysRequirementTest {
     }
 
     @Test
-    void testEquals2() {
-        assertNotEquals(new SysRequirement(), sysRequirementTest);
+    void testNotEquals() {
+        assertFalse(new SysRequirement().equals(sysRequirementTest));
     }
 
     @Test

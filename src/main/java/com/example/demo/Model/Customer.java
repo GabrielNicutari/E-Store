@@ -17,6 +17,23 @@ public class Customer {
     private String country;
     private Collection<Order> ordersById;
 
+    public Customer(String firstName, String lastName, Date dateOfBirth,
+                    String phoneNumber, String address, String city, String country) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.city = city;
+        this.country = country;
+    }
+
+    public Customer(int id) {
+        this.id = id;
+    }
+
+    public Customer() {}
+
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {

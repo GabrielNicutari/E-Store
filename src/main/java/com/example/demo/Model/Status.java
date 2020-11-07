@@ -10,6 +10,16 @@ public class Status {
     private String name;
     private Collection<Order> ordersById;
 
+    public Status(String name) {
+        this.name = name;
+    }
+
+    public Status(int id) {
+        this.id = id;
+    }
+
+    public Status() {}
+
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {

@@ -36,8 +36,8 @@ class PlatformTest {
     }
 
     @Test
-    void testEquals2() {
-        assertNotEquals(new Platform(), platformTest);
+    void testNotEquals() {
+        assertFalse(new Platform().equals(platformTest));
     }
 
     @Test

@@ -14,6 +14,19 @@ public class Order {
     private Customer customerByCustomerId;
     private Status statusesByStatusId;
 
+    public Order(String comments, Date orderDate, Customer customerByCustomerId, Status statusesByStatusId) {
+        this.comments = comments;
+        this.orderDate = orderDate;
+        this.customerByCustomerId = customerByCustomerId;
+        this.statusesByStatusId = statusesByStatusId;
+    }
+
+    public Order(int id) {
+        this.id = id;
+    }
+
+    public Order(){}
+
     @Id
     @Column(name = "id", nullable = false)
     public int getId() {
