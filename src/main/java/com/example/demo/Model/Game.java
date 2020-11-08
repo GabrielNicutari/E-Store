@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -234,6 +235,7 @@ public class Game {
         this.gameHasFieldsById = gameHasFieldsById;
     }
 
+    @JsonBackReference
     @OneToMany(mappedBy = "gamesByProductId")
     public Collection<OrderHasGames> getOrderHasGamesById() {
         return orderHasGamesById;

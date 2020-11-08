@@ -1,5 +1,7 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
@@ -65,6 +67,7 @@ public class Order {
         result = 31 * result + (orderDate != null ? orderDate.hashCode() : 0);
         return result;
     }
+
 
     @OneToMany(mappedBy = "ordersByOrderId")
     public Collection<OrderHasGames> getOrderHasGamesById() {

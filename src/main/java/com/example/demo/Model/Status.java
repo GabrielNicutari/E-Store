@@ -1,5 +1,7 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -50,6 +52,7 @@ public class Status {
         return result;
     }
 
+    @JsonBackReference
     @OneToMany(mappedBy = "statusesByStatusId")
     public Collection<Order> getOrdersById() {
         return ordersById;

@@ -77,7 +77,6 @@ public class OrderHasGames {
         this.ordersByOrderId = ordersByOrderId;
     }
 
-    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
     public Game getGamesByProductId() {

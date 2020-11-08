@@ -1,5 +1,7 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
@@ -131,6 +133,7 @@ public class Customer {
         return result;
     }
 
+    @JsonBackReference
     @OneToMany(mappedBy = "customerByCustomerId")
     public Collection<Order> getOrdersById() {
         return ordersById;
