@@ -91,7 +91,7 @@ public class OrderController {
             _order.setComments(order.getComments());
             _order.setStatusesByStatusId(order.getStatusesByStatusId());
 
-            return new ResponseEntity<>(orderRepository.save(order), HttpStatus.OK);
+            return new ResponseEntity<>(orderRepository.save(_order), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")

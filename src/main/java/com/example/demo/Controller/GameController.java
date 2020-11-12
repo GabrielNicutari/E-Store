@@ -112,7 +112,7 @@ public class GameController {
             _game.setTrailerUrl(game.getTrailerUrl());
             _game.setAdUrl(game.getAdUrl());
 
-            return new ResponseEntity<>(gameRepository.save(game), HttpStatus.OK);
+            return new ResponseEntity<>(gameRepository.save(_game), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
