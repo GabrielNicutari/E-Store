@@ -1,7 +1,11 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Model.Game;
+import com.example.demo.Model.GameHasFields;
 import com.example.demo.Model.Order;
 
+import com.example.demo.Model.OrderHasGames;
+import com.example.demo.Repository.OrderHasGamesRepository;
 import com.example.demo.Repository.OrderRepository;
 import com.example.demo.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +26,8 @@ public class OrderController {
     @Autowired
     OrderRepository orderRepository;
 
+    @Autowired
+    OrderHasGamesRepository orderHasGamesRepository;
 
     private Sort.Direction getSortDirection(String direction) {
         if(direction.equals("asc")) {
@@ -78,6 +84,16 @@ public class OrderController {
     @PostMapping("/create")
     public ResponseEntity<Order> createOrder(@RequestBody Order order){
             Order _order = orderRepository.save(order);
+
+            Collection<OrderHasGames> orderHasGamesCollection = _order.getOrderHasGamesById();
+            for(OrderHasGames orderHasGames : orderHasGamesCollection) {
+
+                orderHasGames.setOrdersByOrderId(new Order(order.getId()));
+                orderHasGames.setOrderId(order.getId());
+
+                orderHasGamesRepository.save(orderHasGames);
+            }
+
             return new ResponseEntity<>(_order, HttpStatus.CREATED);
     }
 
