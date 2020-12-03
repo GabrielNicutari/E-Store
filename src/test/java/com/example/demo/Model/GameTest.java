@@ -166,8 +166,18 @@ class GameTest {
 
     @Test
     void testEquals() {
-        assertNotEquals(new Game(), game);    //this one compares one with values inside
-        assertEquals(new Game(), new Game());
+        String str = "2015-03-31";
+        Date date = Date.valueOf(str);
+        Game newGame = new Game ("TitleTest","DescriptionTest", date
+                ,"DeveloperTest","PublisherTest","EngineTest"
+                ,"PriceTest",20.0,"PosterTest"
+                ,"CoverTest","TrailerTest","AdTest");
+        assertTrue(newGame.equals(game));    //this one compares one with values inside
+    }
+
+    @Test
+    void testNotEquals() {
+        assertFalse(new Game().equals(game));
     }
 
     @Test

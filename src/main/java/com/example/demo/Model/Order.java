@@ -16,20 +16,18 @@ public class Order {
     private Customer customerByCustomerId;
     private Status statusesByStatusId;
 
-    public Order() {}
+    public Order(String comments, Date orderDate, Customer customerByCustomerId, Status statusesByStatusId) {
+        this.comments = comments;
+        this.orderDate = orderDate;
+        this.customerByCustomerId = customerByCustomerId;
+        this.statusesByStatusId = statusesByStatusId;
+    }
 
     public Order(int id) {
         this.id = id;
     }
 
-    public Order(int id, String comments, Date orderDate, Collection<OrderHasGames> orderHasGamesById, Customer customerByCustomerId, Status statusesByStatusId) {
-        this.id = id;
-        this.comments = comments;
-        this.orderDate = orderDate;
-        this.orderHasGamesById = orderHasGamesById;
-        this.customerByCustomerId = customerByCustomerId;
-        this.statusesByStatusId = statusesByStatusId;
-    }
+    public Order(){}
 
     @Id
     @Column(name = "id", nullable = false)

@@ -8,6 +8,11 @@ public class OrderHasGamesPK implements Serializable {
     private int orderId;
     private int productId;
 
+    public OrderHasGamesPK(int orderId, int productId) {
+        this.orderId = orderId;
+        this.productId = productId;
+    }
+
     @Column(name = "order_id", nullable = false)
     @Id
     public int getOrderId() {

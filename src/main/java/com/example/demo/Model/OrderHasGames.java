@@ -14,6 +14,16 @@ public class OrderHasGames {
     private Order ordersByOrderId;
     private Game gamesByProductId;
 
+    public OrderHasGames(int orderId, int productId, int quantity, Order ordersByOrderId, Game gamesByProductId) {
+        this.orderId = orderId;
+        this.productId = productId;
+        this.quantity = quantity;
+        this.ordersByOrderId = ordersByOrderId;
+        this.gamesByProductId = gamesByProductId;
+    }
+
+    public OrderHasGames() {}
+
     @Id
     @Column(name = "order_id", nullable = false)
     public int getOrderId() {
