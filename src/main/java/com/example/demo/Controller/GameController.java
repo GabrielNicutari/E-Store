@@ -85,6 +85,14 @@ public class GameController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    // get one
+    @GetMapping("/{id}")
+    public ResponseEntity<Game> getGame(@PathVariable("id") int id) {
+        Game game = gameRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Not found game with id = " + id));
+        return new ResponseEntity<>(game, HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Game> createGame(@RequestBody Game game){
             Game _game = gameRepository.save(game);
