@@ -22,7 +22,7 @@ import java.util.*;
 @CrossOrigin(origins = {
         "http://localhost:8081",
         "http://localhost:3000",
-        "https://next-level-web-client.herokuapp.com/"
+        "https://next-level-web-client.herokuapp.com"
 })
 @RestController
 @RequestMapping("/orders")
