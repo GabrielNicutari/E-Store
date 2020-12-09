@@ -19,6 +19,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
+@CrossOrigin(origins = {
+        "http://localhost:8081",
+        "http://localhost:3000",
+        "https://next-level-web-client.herokuapp.com/"
+})
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
@@ -42,7 +47,7 @@ public class OrderController {
     public ResponseEntity<Map<String,Object>> getPageOfOrders(
             @RequestParam(required = false) String key,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "3") int size,
+            @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id,asc") String[] sort
     ) {
 
@@ -74,6 +79,7 @@ public class OrderController {
 
         Map<String, Object> response = new HashMap<>();
         response.put("orders", myOrders);
+        response.put("size", size);
         response.put("currentPage", pageTuts.getNumber());
         response.put("totalItems", pageTuts.getTotalElements());
         response.put("totalPages", pageTuts.getTotalPages());

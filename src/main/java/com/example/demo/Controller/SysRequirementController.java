@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = {
+        "http://localhost:8081",
+        "http://localhost:3000",
+        "https://next-level-web-client.herokuapp.com/"
+})
 @RestController
 @RequestMapping("/sysrequirement")
 public class SysRequirementController {
