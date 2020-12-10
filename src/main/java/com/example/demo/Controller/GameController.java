@@ -1,9 +1,7 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Model.Game;
-import com.example.demo.Model.GameHasFields;
-import com.example.demo.Repository.GameHasFieldsRepository;
-import com.example.demo.Repository.GameRepository;
+import com.example.demo.Model.*;
+import com.example.demo.Repository.*;
 import com.example.demo.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,6 +26,21 @@ public class GameController {
 
     @Autowired
     GameRepository gameRepository;
+
+    @Autowired
+    PlatformRepository platformRepository;
+
+    @Autowired
+    SysRequirementRepository sysRequirementRepository;
+
+    @Autowired
+    GenreRepository genreRepository;
+
+    @Autowired
+    ModeRepository modeRepository;
+
+    @Autowired
+    PegiRatingRepository pegiRatingRepository;
 
     @Autowired
     GameHasFieldsRepository gameHasFieldsRepository;
@@ -95,6 +108,9 @@ public class GameController {
 
     @PostMapping("/create")
     public ResponseEntity<Game> createGame(@RequestBody Game game){
+            System.out.println("createGame");
+            System.out.println(game.getId() + " --- " + game.getDescription());
+
             Game _game = gameRepository.save(game);
 
             Collection<GameHasFields> gameHasFieldsCollection = _game.getGameHasFieldsById();
@@ -106,6 +122,18 @@ public class GameController {
 
             }
             return new ResponseEntity<>(_game, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/insertIntoGameHasFields")
+    public ResponseEntity<GameHasFields> insertIntoGameHasField(@RequestBody GameHasFields gameHasFields) {
+
+        System.out.println(gameHasFields.getModeByModeId().getId() + " ==== " + gameHasFields.getGameByGameId().getId());
+        System.out.println(gameHasFields.getGenreByGenreId().getId()+ "=====" + gameHasFields.getPegiRatingsByPegiRatingId().getId() +
+                "====" + gameHasFields.getSysRequirementsBySysRequirementId().getId());
+
+        GameHasFields _gameHasFields = gameHasFieldsRepository.save(gameHasFields);
+
+        return new ResponseEntity<>(_gameHasFields, HttpStatus.CREATED);
     }
 
     @PutMapping("/update/{id}")
@@ -126,6 +154,7 @@ public class GameController {
             _game.setTrailerUrl(game.getTrailerUrl());
             _game.setAdUrl(game.getAdUrl());
 
+
             return new ResponseEntity<>(gameRepository.save(_game), HttpStatus.OK);
     }
 
@@ -136,4 +165,28 @@ public class GameController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping("/platforms")
+    public List<Platform> fetchPlatforms() {
+        return platformRepository.findAll();
+    }
+
+    @GetMapping("/sys-requirements")
+    public List<SysRequirement> fetchSysRequirements() {
+        return sysRequirementRepository.findAll();
+    }
+
+    @GetMapping("/genres")
+    public List<Genre> fetchGenres() {
+        return genreRepository.findAll();
+    }
+
+    @GetMapping("/modes")
+    public List<Mode> fetchModes() {
+        return modeRepository.findAll();
+    }
+
+    @GetMapping("/pegi-rating")
+    public List<PegiRating> fetchPegiRating() {
+        return pegiRatingRepository.findAll();
+    }
 }
